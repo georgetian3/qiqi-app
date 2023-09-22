@@ -40,6 +40,7 @@ class QiQi extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(title: Text('title')),
           bottomNavigationBar: NavigationBar(
+            selectedIndex: 0,
             onDestinationSelected: (destination) => {},
             destinations: [
               for (final page in navigationPages) NavigationDestination(icon: Icon(page.icon), label: page.name)
