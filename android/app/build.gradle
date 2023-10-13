@@ -45,7 +45,7 @@ android {
         applicationId "com.example.qiqi"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 20
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -64,4 +64,10 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.baidu.lbsyun:BaiduMapSDK_Map:7.5.5'
+    implementation 'com.baidu.lbsyun:BaiduMapSDK_Search:7.5.5'
+    implementation 'com.baidu.lbsyun:BaiduMapSDK_Util:7.5.5'
+    implementation 'com.baidu.lbsyun:BaiduMapSDK_Location_All:9.4.0'
+}

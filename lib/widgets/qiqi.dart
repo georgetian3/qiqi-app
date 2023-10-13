@@ -46,7 +46,7 @@ class QiQi extends StatelessWidget {
               for (final page in navigationPages) NavigationDestination(icon: Icon(page.icon), label: page.name)
             ]
           ),
-          body: Text('test body'),
+          body: const SettingsPage(),
         ),
       ),
     );
