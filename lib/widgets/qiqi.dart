@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:qiqi/widgets/login.dart';
+import 'package:qiqi/widgets/map.dart';
 import '../logic/app_state.dart';
 import 'find_my_bike.dart';
 import 'package:redux/redux.dart';
@@ -13,18 +15,16 @@ class Page {
 }
 
 const navigationPages = [
-  Page(SettingsPage(), Icons.settings, 'settings'),
+  Page(MapPage(), Icons.search, 'map'),
   Page(FindMyBikePage(), Icons.search, 'findMyBike'),
+  Page(SettingsPage(), Icons.settings, 'settings'),
 ];
 
 class QiQi extends StatelessWidget {
-
   final Store<AppState> store;
   const QiQi(this.store, {super.key});
-
-  @override
-  build(BuildContext context) {
-    return StoreProvider(
+  @override build(BuildContext context) {
+    return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
         title: 'QiQi',
@@ -33,17 +33,7 @@ class QiQi extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: Scaffold(
-          appBar: AppBar(title: Text('title')),
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: 0,
-            onDestinationSelected: (destination) => {},
-            destinations: [
-              for (final page in navigationPages) NavigationDestination(icon: Icon(page.icon), label: page.name)
-            ]
-          ),
-          body: const SettingsPage(),
-        ),
+        home: const LoginPage(),
       ),
     );
   }
