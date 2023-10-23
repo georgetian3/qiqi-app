@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'app_reducer.dart';
-import 'app_state.dart';
+import '../logic/app_state.dart';
 import 'find_my_bike.dart';
 import 'package:redux/redux.dart';
 import 'settings.dart';
@@ -20,11 +19,8 @@ const navigationPages = [
 
 class QiQi extends StatelessWidget {
 
-  late final Store<AppState> store;
-
-  QiQi({super.key}) {
-    store = Store<AppState>(appReducer, initialState: AppState());
-  }
+  final Store<AppState> store;
+  const QiQi(this.store, {super.key});
 
   @override
   build(BuildContext context) {
