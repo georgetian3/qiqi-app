@@ -3,6 +3,13 @@ import 'dart:io';
 import 'package:qiqi/api/lib/api.dart';
 import 'package:redux/redux.dart';
 
+enum AuthStatus {
+  expired,
+  authenticated,
+  unauthenticated,
+  invalidCredentials,
+}
+
 class AuthState {
   final ApiClient apiClient;
   late final AuthApi authApi;
@@ -11,6 +18,7 @@ class AuthState {
   String? username;
   String? password;
   bool save = false;
+  AuthStatus status = AuthStatus.unauthenticated;
 
   AuthState(this.apiClient) {
     authApi = AuthApi(apiClient);

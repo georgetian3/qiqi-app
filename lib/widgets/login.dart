@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:qiqi/logic/app_state.dart';
 import 'package:qiqi/logic/auth.dart';
+import 'package:qiqi/widgets/consts.dart';
 import 'package:qiqi/widgets/pages.dart';
 import 'package:qiqi/widgets/utils.dart';
 
@@ -13,7 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String _errorMessage = '';
   bool _saveLogin = false;
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
   @override build(BuildContext context) {
     return StoreConnector<AppState, AuthState>(
       converter: (store) => store.state.authState,
-      builder: (context, state) => state.token == null ? const Pages() : 
+      builder: (context, state) => state.status == AuthStatus.authenticated ? const Pages() : 
         Scaffold(
         body: Padding(
           padding: const EdgeInsets.all(32),
@@ -65,14 +65,12 @@ class _LoginPageState extends State<LoginPage> {
               TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(hintText: 'username'),
-              ),
-              const SizedBox(height: 16),
+              ), largeVBox,
               TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(hintText: 'password'),
                 obscureText: true,
-              ),
-              const SizedBox(height: 16),
+              ), largeVBox,
               Row(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -103,9 +101,12 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
               const SizedBox(height: 16),
-              Text(
-                _errorMessage,
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              StoreConnector<AppState, String>(
+                converter: (store) => store.state.authState.status.toString(),
+                builder: (context, error) => Text(
+                  error,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
               ),
             ],
           ),
